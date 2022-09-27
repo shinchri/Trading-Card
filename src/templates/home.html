@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load get_decimal %}
 
 <!-- Extend for more links/styles -->
 {% block head %}{% endblock %}
@@ -9,174 +10,21 @@
 <section class="home-section">
   <h1 class="text-center home-heading">Yugioh Cards</h1>
   <ul class="d-flex flex-row flex-wrap justify-content-start bd-highlight item-display">
+    {% for product in products %}
     <li>
       <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
+        <img src="{{ product.image.url }}" alt="" />
       </div>
       <div class="card-text">
-        <h3>Item Title</h3>
+        <h3>{{ product.name }}</h3>
         <div>
           <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
+            <span class="a-price-symbol">$</span>{{product.price|floatformat:"0"}}<span class="a-price-cent">{{product.price|get_decimal}}</span>
           </p>
         </div>
-        
       </div>
     </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
-    <li>
-      <div class="image-background">
-        <img src="{% static 'image/twin-headed-savalo-dragon.jpeg' %}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>Item Title</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>67<span class="a-price-cent">99</span>
-          </p>
-        </div>
-        
-      </div>
-    </li>
+    {% endfor %}
     
   </ul>
 </section>
