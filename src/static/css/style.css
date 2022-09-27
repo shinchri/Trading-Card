@@ -22,6 +22,11 @@
   padding: 0;
 }
 
+.item-display a{
+  color: black;
+  text-decoration: none;
+}
+
 .item-display .image-background {
   background-color: #F9F9F9;
   padding: 5px 0;
@@ -40,7 +45,7 @@
 
 .item-display .card-text h3 {
   font-weight: 700;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 24px;
 }
 
@@ -77,4 +82,40 @@
 .item-display img{
   max-width: 80%;
   max-height: 80%;
+}
+
+
+.product-detail {
+  min-height: 70vh;
+  margin-top: 70px;
+}
+
+.product-column {
+  float: left;
+}
+
+.left {
+  width: 33%;
+}
+
+.left img {
+  max-width: 80%;
+}
+
+.right {
+  width: 66%;
+}
+
+.product-column h2 {
+  text-decoration: underline;
+}
+
+.product-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.product-text div {
+  min-height: 120px;
 }

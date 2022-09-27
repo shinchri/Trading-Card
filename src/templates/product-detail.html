@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load get_decimal %}
+
+{% block title %}Yugioh Game Card Trading - Product Detail | {{product.name}} {% endblock %}
+
+<!-- Extend for more links/styles -->
+{% block head %}{% endblock %}
+
+<!-- Body -->
+{% block body %}
+<section class="product-detail">
+  <div class="product-row">
+    <div class="product-column left">
+      <img src={{ product.image.url }} />
+    </div>
+    <div class="product-column right product-text">
+      <div>
+        <h2>{{product.name}}</h2>
+        <p class="a-price">
+          Price: <span class="a-price-symbol">$</span>{{product.price|floatformat:"0"}}<span class="a-price-cent">{{product.price|get_decimal}}</span>
+        </p>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-primary">Buy</button>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+<!-- Extend for more scripts-->
+{% block end %}{% endblock %}

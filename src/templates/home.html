@@ -13,16 +13,20 @@
     {% for product in products %}
     <li>
       <div class="image-background">
-        <img src="{{ product.image.url }}" alt="" />
-      </div>
-      <div class="card-text">
-        <h3>{{ product.name }}</h3>
-        <div>
-          <p class="a-price">
-            <span class="a-price-symbol">$</span>{{product.price|floatformat:"0"}}<span class="a-price-cent">{{product.price|get_decimal}}</span>
-          </p>
+          <a href="{% url "main:product-detail" id=product.id %}">
+            <img src="{{ product.image.url }}" alt="" />
+          </a>
         </div>
-      </div>
+        <div class="card-text">
+          <a href="{% url "main:product-detail" id=product.id %}">
+            <h3>{{ product.name }}</h3>
+          </a>
+          <div>
+            <p class="a-price">
+              <span class="a-price-symbol">$</span>{{product.price|floatformat:"0"}}<span class="a-price-cent">{{product.price|get_decimal}}</span>
+            </p>
+          </div>
+        </div>
     </li>
     {% endfor %}
     
