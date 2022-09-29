@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.views import generic
+from django.contrib import messages
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
+from django.views import generic, View
 
-from .models import Product
+from .models import Product, Cart, Order
 
 # Create your views here.
 class HomeView(generic.TemplateView):
@@ -28,3 +30,21 @@ class ProductDetailView(generic.TemplateView):
     context['product'] = product
     
     return context
+
+class ProductAddCartView(View):
+  def post(self, request, **kwargs):
+    product_id = self.kwargs.get('id')
+    
+    product = get_object_or_404(Product, id=product_id)
+    cart = get_object_or_404(Cart, user=request.user)
+
+    # Create order
+    order = Order.objects.create(product=product, cart=cart, price=product.price)
+    print(f"{product.name} was put into Cart with order id {order.id} for {request.user.email}")
+
+    return JsonResponse({
+      'is_added': True
+    })
+
+class ShoppingCartView(generic.TemplateView):
+  template_name = 'shopping-cart.html'
