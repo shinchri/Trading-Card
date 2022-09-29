@@ -2,13 +2,34 @@
 {% load static %}
 
 <!-- Extend for more links/styles -->
-{% block head %}{% endblock %}
+{% block head %}
+<link href="{% static 'css/shopping-cart.css' %}" rel="stylesheet">
+{% endblock %}
 
 <!-- Body -->
 {% block body %}
 <section class="home-section">
   <h1 class="text-center home-heading">Shopping Cart</h1>
 
+  <ul class="shopping-list">
+  {% for item in cart.order_set.all %}
+    <li class="shopping-list-item">
+      <div class='shopping-item-left'>
+        <a href="{% url "main:product-detail" id=item.product.id %}">
+        <img src="{{ item.product.image.url }}" alt="" />
+        </a>
+      </div>
+      <div class='shopping-item-right'>
+        <a href="{% url "main:product-detail" id=item.product.id %}">
+          <h3>{{ item.product.name }}</h3>
+        </a>
+        <p>Price: ${{ item.price }}</p>
+        <p>Created Date: {{ item.created_date }}</p>
+      </div>
+      
+    </li>
+  {% endfor %}
+  </ul>
 </section>
 {% endblock %}
 

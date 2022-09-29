@@ -28,5 +28,5 @@ class Order(models.Model):
   created_date = models.DateField(auto_now_add=True)
 
   def __str__(self):
-    return f"{self.product.name}'s Order_{self.id}"
+    return f"{self.product.name}'s Order #{self.id}"
 

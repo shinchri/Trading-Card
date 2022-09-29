@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load get_decimal %}
+{% load get_int %}
 
 {% block title %}Yugioh Game Card Trading - Product Detail | {{product.name}} {% endblock %}
 
@@ -18,7 +19,7 @@
       <div>
         <h2>{{product.name}}</h2>
         <p class="a-price">
-          Price: <span class="a-price-symbol">$</span>{{product.price|floatformat:"0"}}<span class="a-price-cent">{{product.price|get_decimal}}</span>
+          Price: <span class="a-price-symbol">$</span>{{product.price|get_int}}<span class="a-price-cent">{{product.price|get_decimal}}</span>
         </p>
       </div>
     </div>

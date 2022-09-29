@@ -48,3 +48,17 @@ class ProductAddCartView(View):
 
 class ShoppingCartView(generic.TemplateView):
   template_name = 'shopping-cart.html'
+
+  def get_context_data(self, **kwargs):
+    context = super(ShoppingCartView, self).get_context_data(**kwargs)
+
+    cart_id = kwargs.get('id')
+    
+    cart = Cart.objects.get(id=cart_id)
+    print(cart)
+    print(cart.order_set.all())
+
+    context['cart'] = cart
+
+    return context
+

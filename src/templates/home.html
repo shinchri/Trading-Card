@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load get_decimal %}
+{% load get_int %}
 
 <!-- Extend for more links/styles -->
 {% block head %}{% endblock %}
@@ -23,7 +24,7 @@
           </a>
           <div>
             <p class="a-price">
-              <span class="a-price-symbol">$</span>{{product.price|floatformat:"0"}}<span class="a-price-cent">{{product.price|get_decimal}}</span>
+              <span class="a-price-symbol">$</span>{{product.price|get_int}}<span class="a-price-cent">{{product.price|get_decimal}}</span>
             </p>
           </div>
         </div>
