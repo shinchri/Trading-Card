@@ -1,6 +1,7 @@
+import json
 from django.contrib import messages
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 
 from .models import Product, Cart, Order
@@ -39,12 +40,11 @@ class ProductAddCartView(View):
     cart = get_object_or_404(Cart, user=request.user)
 
     # Create order
-    order = Order.objects.create(product=product, cart=cart, price=product.price)
-    print(f"{product.name} was put into Cart with order id {order.id} for {request.user.email}")
+    Order.objects.create(product=product, cart=cart, price=product.price)
 
-    return JsonResponse({
-      'is_added': True
-    })
+    messages.success(request, f'{product.name} was added to the Shopping Cart.')
+
+    return redirect('main:product-detail', id=product_id)
 
 class ShoppingCartView(generic.TemplateView):
   template_name = 'shopping-cart.html'
@@ -55,10 +55,24 @@ class ShoppingCartView(generic.TemplateView):
     cart_id = kwargs.get('id')
     
     cart = Cart.objects.get(id=cart_id)
-    print(cart)
-    print(cart.order_set.all())
 
     context['cart'] = cart
 
     return context
 
+class OrderRemove(View):
+  def post(self, request, *args, **kwargs):
+
+    user = request.user
+    cart = Cart.objects.get(user=user)
+
+    order_id = kwargs.get('id')
+
+    instance = Order.objects.get(id=order_id)
+    product_name = instance.product.name
+    instance.delete()
+    
+
+    messages.success(request, f'{product_name} was removed from Shopping Cart.')
+
+    return redirect('main:shopping-cart', id=cart.id)
