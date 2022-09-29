@@ -40,7 +40,12 @@ class ProductAddCartView(View):
     cart = get_object_or_404(Cart, user=request.user)
 
     # Create order
-    Order.objects.create(product=product, cart=cart, price=product.price)
+    try:
+      order = Order.objects.get(product=product)
+      order.quantity = order.quantity + 1
+      order.save()
+    except Order.DoesNotExist:
+      Order.objects.create(product=product, cart=cart, price=product.price)
 
     messages.success(request, f'{product.name} was added to the Shopping Cart.')
 
@@ -52,11 +57,18 @@ class ShoppingCartView(generic.TemplateView):
   def get_context_data(self, **kwargs):
     context = super(ShoppingCartView, self).get_context_data(**kwargs)
 
+    # Retreive card
     cart_id = kwargs.get('id')
-    
     cart = Cart.objects.get(id=cart_id)
+    subtotal = 0
+
+    for order in cart.order_set.all():
+      price = order.price
+      qty = order.quantity
+      subtotal += (price * qty)
 
     context['cart'] = cart
+    context['subtotal'] = subtotal
 
     return context
 
@@ -67,12 +79,21 @@ class OrderRemove(View):
     cart = Cart.objects.get(user=user)
 
     order_id = kwargs.get('id')
+    type = kwargs.get('type')
 
     instance = Order.objects.get(id=order_id)
     product_name = instance.product.name
-    instance.delete()
-    
 
-    messages.success(request, f'{product_name} was removed from Shopping Cart.')
+    if type == 1 and instance.quantity > 1:
+      # delete one item
+      instance.quantity = instance.quantity - 1
+      instance.save()
+
+      messages.success(request, f'1 {product_name} was removed from Shopping Cart.')
+
+    else:
+      instance.delete()
+  
+      messages.success(request, f'All {product_name} was removed from Shopping Cart.')
 
     return redirect('main:shopping-cart', id=cart.id)

@@ -15,7 +15,7 @@
           <a class="nav-link" href="{% url 'main:home' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">Member</a>
+          <a class="nav-link" href="{% url 'main:shopping-cart' id=request.user.cart.id %}">Cart</a>
         </li>
       </ul>
     </div>

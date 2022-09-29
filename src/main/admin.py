@@ -24,4 +24,4 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-  list_display = ('id', 'product', 'cart', 'price', 'created_date')
+  list_display = ('id', 'product', 'cart', 'quantity', 'price', 'created_date')

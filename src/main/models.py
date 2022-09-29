@@ -24,6 +24,7 @@ class Cart(models.Model):
 class Order(models.Model):
   product = models.ForeignKey(to=Product, on_delete=models.PROTECT)
   cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE)
+  quantity = models.IntegerField(max_length=5, blank=True, default=1)
   price = models.DecimalField(max_digits=6,decimal_places=2, blank=True)
   created_date = models.DateField(auto_now_add=True)
 

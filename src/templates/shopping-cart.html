@@ -9,7 +9,7 @@
 <!-- Body -->
 {% block body %}
 <section class="home-section">
-  <h1 class="text-center home-heading">Shopping Cart</h1>
+  <h1 class="text-center home-heading">Shopping Cart - (subtotal: ${{subtotal}})</h1>
 
   <ul class="shopping-list">
   {% for item in cart.order_set.all %}
@@ -21,15 +21,20 @@
       </div>
       <div class='shopping-item-right'>
         <a href="{% url "main:product-detail" id=item.product.id %}">
-          <h3>{{ item.product.name }}</h3>
+          <h3>{{ item.product.name }} (x{{item.quantity}})</h3>
         </a>
         <p>Price: ${{ item.price }}</p>
-        <p>Created Date: {{ item.created_date }}</p>
-        <!--<button id="{{ item.id }}" value="{{ item.product.name }}" class="btn btn-danger">Remove</button>-->
-        <form action="{% url 'main:remove-order' id=item.id %}" method="post">
-          {% csrf_token %}
-          <input type="submit" value="Remove" class="btn btn-danger" />
-        </form>
+        <p>Date Added: {{ item.created_date }}</p>
+        <div class="submit-button">
+          <form class="first-button" action="{% url 'main:remove-order' id=item.id type=1%}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Remove One" class="btn btn-danger" />
+          </form>
+          <form class="second-button" action="{% url 'main:remove-order' id=item.id type=2%}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Remove All" class="btn btn-danger" />
+          </form>
+        </div>
       </div>
       
     </li>
