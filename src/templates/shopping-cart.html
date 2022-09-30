@@ -11,7 +11,7 @@
 <section class="home-section">
   <h1 class="text-center home-heading">Shopping Cart - (subtotal: ${{subtotal}})</h1>
 
-  {% if subtotal < 0 %}
+  {% if subtotal != 0 %}
 
   <div class="d-flex">
     <ul class="shopping-list me-auto">
