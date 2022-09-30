@@ -11,6 +11,8 @@
 <section class="home-section">
   <h1 class="text-center home-heading">Shopping Cart - (subtotal: ${{subtotal}})</h1>
 
+  {% if subtotal < 0 %}
+
   <div class="d-flex">
     <ul class="shopping-list me-auto">
       {% for item in cart.order_set.all %}
@@ -70,6 +72,9 @@
       </ul>
     </div>
   </div>
+  {% else %}
+    <p class='text-center'>No items listed...</p>
+  {% endif %}
 </section>
 {% endblock %}
 

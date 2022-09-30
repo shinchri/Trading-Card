@@ -9,7 +9,7 @@ from .managers import CustomUserManager
 class CustomUser(AbstractUser):
   email = models.EmailField(_('email address'), unique=True)
 
-  objects = CustomUserManager
+  objects = CustomUserManager()
 
   def __str__(self):
     return self.email
