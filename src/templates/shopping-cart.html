@@ -11,35 +11,65 @@
 <section class="home-section">
   <h1 class="text-center home-heading">Shopping Cart - (subtotal: ${{subtotal}})</h1>
 
-  <ul class="shopping-list">
-  {% for item in cart.order_set.all %}
-    <li class="shopping-list-item">
-      <div class='shopping-item-left'>
-        <a href="{% url "main:product-detail" id=item.product.id %}">
-        <img src="{{ item.product.image.url }}" alt="" />
-        </a>
-      </div>
-      <div class='shopping-item-right'>
-        <a href="{% url "main:product-detail" id=item.product.id %}">
-          <h3>{{ item.product.name }} (x{{item.quantity}})</h3>
-        </a>
-        <p>Price: ${{ item.price }}</p>
-        <p>Date Added: {{ item.created_date }}</p>
-        <div class="submit-button">
-          <form class="first-button" action="{% url 'main:remove-order' id=item.id type=1%}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Remove One" class="btn btn-danger" />
-          </form>
-          <form class="second-button" action="{% url 'main:remove-order' id=item.id type=2%}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Remove All" class="btn btn-danger" />
-          </form>
-        </div>
-      </div>
-      
-    </li>
-  {% endfor %}
-  </ul>
+  <div class="d-flex">
+    <ul class="shopping-list me-auto">
+      {% for item in cart.order_set.all %}
+        <li class="shopping-list-item">
+          <div class='shopping-item-left'>
+            <a href="{% url "main:product-detail" id=item.product.id %}">
+            <img src="{{ item.product.image.url }}" alt="" />
+            </a>
+          </div>
+          <div class='shopping-item-right'>
+            <a href="{% url "main:product-detail" id=item.product.id %}">
+              <h3>{{ item.product.name }} (x{{item.quantity}})</h3>
+            </a>
+            <p>Price: ${{ item.price }}</p>
+            <p>Date Added: {{ item.created_date }}</p>
+            <div class="submit-button">
+              <form class="first-button" action="{% url 'main:remove-order' id=item.id type=1%}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Remove One" class="btn btn-danger" />
+              </form>
+              <form class="second-button" action="{% url 'main:remove-order' id=item.id type=2%}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Remove All" class="btn btn-danger" />
+              </form>
+            </div>
+          </div>
+          
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="order-card">
+      <h3>Order Summary</h3>
+      <ul>
+        <li class='d-flex'>
+          <p class="me-auto">Items</p>
+          <p>${{subtotal}}</p>
+        </li>
+        <li  class='d-flex'>
+          <p class="me-auto">Shipping & Handling</p>
+          <p>$0.00</p>
+        </li>
+        <hr />
+        <li  class='d-flex'>
+          <p class="me-auto">Total before tax</p>
+          <p>${{subtotal}}</p>
+        </li>
+        <li  class='d-flex'>
+          <p class="me-auto">Total Tax</p>
+          <p>$12.00</p>
+        </li>
+        <hr />
+        <li  class='d-flex'>
+          <p class="me-auto">Order Total</p>
+          <p>$100.00</p>
+        </li>
+        <button id="shopping-checkout" class="btn btn-warning">Proceed to Checkout</button>
+      </ul>
+    </div>
+  </div>
 </section>
 {% endblock %}
 

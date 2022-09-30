@@ -1,5 +1,6 @@
 .shopping-list {
   list-style: none;
+  width: 60%;
 }
 
 .shopping-list-item {
@@ -35,4 +36,30 @@
 .shopping-item-right a{
   color: black;
   text-decoration: none;
+}
+
+.submit-button {
+  display: flex;
+}
+
+.first-button {
+  margin-right: 5px;
+}
+
+.shopping-section {
+  display: flex;
+  width: 100%;
+}
+
+.order-card {
+  border: #888888 solid 1px;
+  width: 25%;
+  height:70%;
+  padding: 15px;
+}
+
+.order-card ul {
+  padding: 0;
+  list-style: none;
+  text-align: center;
 }
