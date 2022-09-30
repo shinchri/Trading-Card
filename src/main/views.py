@@ -61,6 +61,7 @@ class ShoppingCartView(generic.TemplateView):
     cart_id = kwargs.get('id')
     cart = Cart.objects.get(id=cart_id)
     subtotal = 0
+    tax = 12
 
     for order in cart.order_set.all():
       price = order.price
@@ -69,6 +70,7 @@ class ShoppingCartView(generic.TemplateView):
 
     context['cart'] = cart
     context['subtotal'] = subtotal
+    context['total'] = subtotal + tax
 
     return context
 
